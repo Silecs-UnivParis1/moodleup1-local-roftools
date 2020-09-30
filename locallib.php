@@ -9,7 +9,6 @@
 global $CFG;
 
 require_once($CFG->dirroot . "/course/lib.php");
-require_once($CFG->dirroot . "/lib/coursecatlib.php");
 
 /* @var $DB moodle_database */
 
@@ -100,7 +99,7 @@ function create_rof_categories($verb=0) {
         $newcategory->name = $hlcat['name'];
         $newcategory->idnumber = $level .':'. $catpath . $hlcat['idnumber'];
         $newcategory->parent = $parentid;
-        $category = coursecat::create($newcategory);
+        $category = core_course_category::create($newcategory);
 
         $parentid = $category->id;
         $catpath = $hlcat['idnumber'] . '/';
@@ -117,7 +116,7 @@ function create_rof_categories($verb=0) {
         $newcategory->name = $component->name;
         $newcategory->idnumber = '3:' . $hlCategories[0]['idnumber'] . '/' . $hlCategories[1]['idnumber'] . '/' . $component->number;
         $newcategory->parent = $rofRootId;
-        $category = coursecat::create($newcategory);
+        $category = core_course_category::create($newcategory);
         $compCatId = $category->id;
         fix_course_sortorder();
         list ($inSql, $inParams) = $DB->get_in_or_equal(explode(',', $component->sub));
@@ -139,7 +138,7 @@ function create_rof_categories($verb=0) {
                 $newcategory->idnumber = '4:' . $hlCategories[0]['idnumber'] . '/' . $hlCategories[1]['idnumber'] . '/' . $component->number .'/'. $classeDiplome;
                 $newcategory->parent = $compCatId;
                 roftools_progressBar($verb, 1, " $classeDiplome");
-                $category = coursecat::create($newcategory);
+                $category = core_course_category::create($newcategory);
                 // $progCatId = $category->id;
                 fix_course_sortorder();
             }
