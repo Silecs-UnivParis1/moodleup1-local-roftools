@@ -8,6 +8,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2014051901;        // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2012061700;        // Requires this Moodle version
+$plugin->version   = 2020100300;        // The current plugin version (Date: YYYYMMDDXX)
+$plugin->requires  = 2021052500;        // Requires this Moodle version  //2021052500
 $plugin->component = 'local_roftools';       // Full name of the plugin (used for diagnostics)

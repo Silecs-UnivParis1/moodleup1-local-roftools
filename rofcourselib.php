@@ -81,13 +81,13 @@ function rof_get_referenced_objects($crsid = null) {
 
     $referencenb = array();
     $referencefirst = array();
-	$rpiid = $DB->get_field('custom_info_field', 'id', array('shortname' => 'up1rofpathid', 'objectname' => 'course'), MUST_EXIST);
+	$rpiid = $DB->get_field('customfield_field', 'id', ['shortname' => 'up1rofpathid'], MUST_EXIST);
 
-    $conds = array('fieldid' => $rpiid);
+    $conds = ['fieldid' => $rpiid];
     if (isset($crsid) && is_integer($crsid)) {
-        $conds['objectid'] = $crsid;
+        $conds['instanceid'] = $crsid;
     }
-    $rofpathidset = $DB->get_records_menu('custom_info_data', $conds, '', 'objectid, data');
+    $rofpathidset = $DB->get_records_menu('customfield_data', $conds, '', 'instanceid, value');
 
     foreach ($rofpathidset as $courseid => $rofpathids) {
         $tabrofpathids = explode(';', $rofpathids);
@@ -138,11 +138,11 @@ function rof_get_broken_references($referencedrof) {
 function rof_object_is_referenced_by($rofid) {
     global $DB;
 
-    $rpiid = $DB->get_field('custom_info_field', 'id', array('shortname' => 'up1rofpathid', 'objectname' => 'course'), MUST_EXIST);
+    $rpiid = $DB->get_field('customfield_field', 'id', ['shortname' => 'up1rofpathid'], MUST_EXIST);
     $sql = "SELECT c.id, c.fullname "
-         . "FROM {custom_info_data} cid "
-         . "JOIN {course} c ON (cid.objectid = c.id)"
-         . "WHERE objectname='course' AND fieldid = ? AND data LIKE '%" . $rofid . "%'" ;
+         . "FROM {customfield_data} cid "
+         . "JOIN {course} c ON (cid.instanceid = c.id)"
+         . "WHERE fieldid = ? AND value LIKE '%" . $rofid . "%'" ;
     $courses = $DB->get_records_sql_menu($sql, array($rpiid));
     return $courses;
 }
