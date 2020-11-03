@@ -58,3 +58,12 @@ if (has_capability('moodle/site:config', context_system::instance())) {
     $settings->add($rofetabcode);
 
 }
+
+$ADMIN->add('reports',
+            new admin_externalpage(
+                'local_roftools_viewreport',
+                "UP1 Statistiques ROF",
+                "$CFG->wwwroot/local/roftools/viewreport.php",
+                'local/roftools:viewreport'
+                )
+        );
