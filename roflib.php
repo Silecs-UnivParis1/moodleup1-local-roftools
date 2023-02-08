@@ -286,10 +286,9 @@ function rof_rofpath_to_category($rofpath, $catid=null) {
 
     $typedip = $DB->get_field('rof_program', 'typedip', array('rofid' => $rofpath[1]), MUST_EXIST);
     if ($typedip) {
-
         $eqvDiplomas = equivalent_diplomas();
-        $catcode = '4:' . $yearcode .'/'. $etabcode .'/'. $rofpath[0] .'/'. $eqvDiplomas[$typedip];
-
+         $catcode = '4:' . $yearcode .'/'. $etabcode .'/'. $rofpath[0] .'/'
+            . (isset($eqvDiplomas[$typedip]) ? $eqvDiplomas[$typedip] : '');
         $res = $DB->get_field('course_categories', 'id', array('idnumber' => $catcode));
         return $res;
     }

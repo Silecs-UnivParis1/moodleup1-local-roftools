@@ -96,7 +96,7 @@ function rof_get_metadata($rofobject) {
         $res['Indexation']['up1niveauannee'] = rof_guess_year($res['Indexation']['up1semestre'], $program->typedip);
         $res['Indexation']['up1niveau'] = rof_guess_level($res['Indexation']['up1niveauannee']);
         $eqvDiplomas = equivalent_diplomas();
-        $res['Indexation']['up1niveaulmda'] = $eqvDiplomas[$program->typedip];
+        $res['Indexation']['up1niveaulmda'] = (isset($eqvDiplomas[$program->typedip]) ? $eqvDiplomas[$program->typedip] : '');
         $res['Indexation']['up1composante'] = $refcomponents[$rofidpath[0]];
     } else {
         $res['Indexation']['up1subprogram'] = '';
