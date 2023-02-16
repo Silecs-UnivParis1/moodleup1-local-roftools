@@ -9,3 +9,4 @@
  */
 
 $string['pluginname'] = 'ROF tools';
+$string['roftools:viewreport'] = 'View ROF Statistics';
