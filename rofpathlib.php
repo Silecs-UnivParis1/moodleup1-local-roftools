@@ -61,9 +61,11 @@ function rof_get_course_all_paths($rofid) {
                 $stop = false;
                 $parents = explode(',', $record->parents);
                 foreach ($parents as $parent) {
-                    $npath = $path; // y'a pas moyen d'écrire ça en une ligne ? //** @todo
-                    $npath[] = $parent;
-                    $newlist[] = $npath;
+                    if ($parent != '') {
+                        $npath = $path; // y'a pas moyen d'écrire ça en une ligne ? //** @todo
+                        $npath[] = $parent;
+                        $newlist[] = $npath;
+                    }
                 }
             }
         } // foreach ($prevlist)
@@ -91,7 +93,11 @@ function rof_get_course_all_pathnames($pathlist) {
         $pathname = array();
         foreach ($path as $rofid) {
             list($record, $stop) = rof_get_record($rofid);
-            $pathname[] = rof_combined_name($record->localname, $record->name);
+            if ($record) {
+                $pathname[] = rof_combined_name($record->localname, $record->name);
+            } else {
+                $pathname[] = '';
+            }
         }
         $res[] = array_combine($path, $pathname);
     }
