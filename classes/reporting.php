@@ -5,11 +5,11 @@ require_once($CFG->dirroot . '/local/roftools/roflib.php'); // to get ROF data
 
 class reporting {
 
-    private $viewobject = '/local/roftools/viewobject.php';
+    const VIEWOBJECT = '/local/roftools/viewobject.php';
 
     /**
      *
-     * @global moodle_database $DB
+     * @global \moodle_database $DB
      * @return array
      */
     public static function get_overview() {
@@ -38,7 +38,7 @@ class reporting {
 
     /**
      *
-     * @global moodle_database $DB
+     * @global \moodle_database $DB
      * @return array
      */
     public static function get_courses() {
@@ -60,7 +60,7 @@ class reporting {
 
     /**
      *
-     * @global moodle_database $DB
+     * @global \moodle_database $DB
      * @return array
      */
     public static function get_components() {
@@ -87,7 +87,7 @@ class reporting {
 
     /**
      *
-     * @global moodle_database $DB
+     * @global \moodle_database $DB
      * @return array
      */
     public static function get_persons_not_empty() {
@@ -124,9 +124,9 @@ class reporting {
             . "WHERE level=1 AND subnb>0 AND coursesnb>0");
 
         foreach ($programs as $program) {
-            $url = new moodle_url(self::$viewobject, array('rofid'=>$program->rofid));
+            $url = new \moodle_url(self::VIEWOBJECT, ['rofid' => $program->rofid]);
             $res[] = array (
-                html_writer::link($url, $program->rofid),
+                \html_writer::link($url, $program->rofid),
                 $program->name,
                 $program->subnb,
                 $program->coursesnb
@@ -153,10 +153,10 @@ class reporting {
             $items = $DB->get_records_sql($sql);
 
             foreach ($items as $item) {
-                $url = new moodle_url(self::$viewobject, array('rofid' => $item->rofid));
+                $url = new \moodle_url(self::VIEWOBJECT, ['rofid' => $item->rofid]);
                 $res[] = array (
                     $object,
-                    html_writer::link($url, $item->rofid),
+                    \html_writer::link($url, $item->rofid),
                     $item->name,
                     $item->localname
                 );
