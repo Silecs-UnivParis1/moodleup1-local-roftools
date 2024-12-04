@@ -10,13 +10,15 @@ require_login();
 $rofid = required_param('rofid', PARAM_ALPHANUMEXT); //
 $path = optional_param('path', null, PARAM_ALPHANUMEXT); //
 
+$PAGE->set_context(context_system::instance());
+$PAGE->set_url("{$CFG->wwwroot}/local/roftools/viewobject.php");
+$PAGE->navbar->add('Objet ROF');
+
 // Print the header.
 $table = rof_get_table($rofid);
-admin_externalpage_setup('reportup1rofstats', '', null, '', array('pagelayout'=>'report'));
+admin_externalpage_setup('local_roftools_viewreport', '', null, '', ['pagelayout'=>'report']);
 echo $OUTPUT->header();
 echo $OUTPUT->heading('Détails de ' . $rofid ." ($table)");
-
-$url = "$CFG->wwwroot/local/roftools/index.php";
 
 $browserurl = "$CFG->wwwroot/local/rof_browser/rof_browser.php";
 
