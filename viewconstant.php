@@ -9,7 +9,7 @@ require_login();
 $constant = optional_param('constant', null, PARAM_ALPHANUMEXT); //
 
 // Print the header.
-admin_externalpage_setup('reportup1rofstats', '', null, '', array('pagelayout'=>'report'));
+admin_externalpage_setup('local_roftools_viewreport', '', null, '', ['pagelayout'=>'report']);
 echo $OUTPUT->header();
 echo $OUTPUT->heading("Table rof_constant - élément " . $constant);
 

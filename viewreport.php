@@ -13,7 +13,7 @@ require_once($CFG->dirroot.'/local/roftools/rofcourselib.php');
 require_once($CFG->libdir.'/adminlib.php');
 
 require_login();
-//admin_externalpage_setup('local_roftools_viewreport', '', null, '', ['pagelayout' => 'report']);
+admin_externalpage_setup('local_roftools_viewreport', '', null, '', ['pagelayout' => 'report']);
 
 /* @var $PAGE moodle_page */
 global $PAGE, $OUTPUT;
